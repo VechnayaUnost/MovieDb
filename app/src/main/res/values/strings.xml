@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieDb</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_search">Search</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="poster_description">Poster not found</string>
 </resources>
