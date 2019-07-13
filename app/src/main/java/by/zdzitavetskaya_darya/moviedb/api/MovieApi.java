@@ -7,11 +7,11 @@ import retrofit2.http.Query;
 
 public interface MovieApi {
     @GET("/movie/top_rated")
-    Single<MovieCover> getTopRated(@Query("api_key") String apiKey);
+    Single<MovieCover> getTopRated();
 
     @GET("movie/upcoming")
-    Single<MovieCover> getUpcoming(@Query("api_key") String apiKey);
+    Single<MovieCover> getUpcoming();
 
     @GET("/search/movie")
-    Single<MovieCover> searchMovies(@Query("query") String query, @Query("api_key") String apiKey);
+    Single<MovieCover> searchMovies(@Query("query") String query);
 }

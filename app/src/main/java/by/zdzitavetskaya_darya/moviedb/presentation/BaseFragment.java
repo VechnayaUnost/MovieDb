@@ -16,12 +16,8 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import moxy.MvpAppCompatFragment;
-import moxy.presenter.InjectPresenter;
 
-public abstract class BaseFragment<P extends BasePresenter> extends MvpAppCompatFragment {
-
-    @InjectPresenter
-    P presenter;
+public abstract class BaseFragment extends MvpAppCompatFragment {
 
     private Unbinder unbinder;
 
@@ -40,9 +36,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends MvpAppCompat
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (presenter != null) {
-            presenter.onViewAttached();
-        }
+
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         getRecycler().setLayoutManager(layoutManager);
 
@@ -53,9 +47,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends MvpAppCompat
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (presenter != null) {
-            presenter.onViewDetached();
-        }
+
         unbinder.unbind();
     }
 }
