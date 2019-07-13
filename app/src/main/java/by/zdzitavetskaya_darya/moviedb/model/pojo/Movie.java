@@ -1,14 +1,17 @@
 package by.zdzitavetskaya_darya.moviedb.model.pojo;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
-//@Entity
+@Entity
 public class Movie {
 
     @SerializedName("vote_count")
     private int voteCount;
 
-    //@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 

@@ -6,6 +6,7 @@ import com.facebook.stetho.Stetho;
 
 import by.zdzitavetskaya_darya.moviedb.di.component.AppComponent;
 import by.zdzitavetskaya_darya.moviedb.di.component.DaggerAppComponent;
+import by.zdzitavetskaya_darya.moviedb.di.module.RoomModule;
 
 public class App extends Application {
 
@@ -26,6 +27,7 @@ public class App extends Application {
     public AppComponent buildComponent() {
         return DaggerAppComponent
                     .builder()
+                    .roomModule(new RoomModule(this))
                     .build();
     }
 
