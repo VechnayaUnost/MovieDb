@@ -6,12 +6,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MovieApi {
-    @GET("/movie/top_rated")
+    @GET("movie/top_rated")
     Single<MovieCover> getTopRated();
 
     @GET("movie/upcoming")
     Single<MovieCover> getUpcoming();
 
-    @GET("/search/movie")
+    @GET("search/movie")
     Single<MovieCover> searchMovies(@Query("query") String query);
 }
