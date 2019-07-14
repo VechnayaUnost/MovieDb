@@ -5,4 +5,6 @@
     <string name="title_search">Search</string>
     <string name="title_favourites">Favourites</string>
     <string name="poster_description">Poster not found</string>
+    <string name="message_no_internet_connection">No internet connection!</string>
+    <string name="message_no_results">No results</string>
 </resources>
