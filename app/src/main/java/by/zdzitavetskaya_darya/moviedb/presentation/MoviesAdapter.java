@@ -62,6 +62,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return movies.size();
     }
 
+    public void clearList() {
+        movies.clear();
+        notifyDataSetChanged();
+    }
+
+    public void updateAdapter(final List<Movie> newItems) {
+        movies.clear();
+        movies.addAll(newItems);
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.movie_title)
         TextView title;
