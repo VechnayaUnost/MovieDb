@@ -1,4 +1,4 @@
-package by.zdzitavetskaya_darya.moviedb.presentation;
+package by.zdzitavetskaya_darya.moviedb.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +23,15 @@ import by.zdzitavetskaya_darya.moviedb.utils.Utility;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private final List<Movie> movies;
+    private final Listener listener;
 
     public List<Movie> getMovies() {
         return movies;
     }
 
-    MoviesAdapter(final List<Movie> movies) {
+    public MoviesAdapter(final List<Movie> movies, final Listener listener) {
         this.movies = movies;
+        this.listener = listener;
     }
 
     @NonNull
@@ -73,6 +75,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public interface Listener {
+        void onItemClick(int id);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.movie_title)
         TextView title;
@@ -90,6 +96,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(movies.get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 }

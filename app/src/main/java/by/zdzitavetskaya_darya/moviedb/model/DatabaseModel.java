@@ -1,5 +1,8 @@
 package by.zdzitavetskaya_darya.moviedb.model;
 
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,15 +34,20 @@ public class DatabaseModel {
         return movieDao.getFavouriteMovies(true);
     }
 
-    public Completable insertMovies(List<Movie> movies) {
+    public Single<Movie> getMovieById(final int id) {
+        return movieDao.getMovieById(id);
+    }
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public Completable insertMovies(final List<Movie> movies) {
         return movieDao.insertAll(movies);
     }
 
-    public Completable insertMovie(Movie movie) {
+    public Completable insertMovie(final Movie movie) {
         return movieDao.insert(movie);
     }
 
-    public Completable deleteMovie(Movie movie) {
+    public Completable deleteMovie(final Movie movie) {
         return movieDao.delete(movie);
     }
 }

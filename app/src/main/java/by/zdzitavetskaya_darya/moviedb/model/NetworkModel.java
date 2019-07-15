@@ -24,7 +24,7 @@ public class NetworkModel {
         return movieApi.getUpcoming();
     }
 
-    public Single<MovieCover> getSearchedMovies(String query) {
+    public Single<MovieCover> getSearchedMovies(final String query) {
         return movieApi.searchMovies(query);
     }
 }

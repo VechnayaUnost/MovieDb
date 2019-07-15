@@ -25,6 +25,9 @@ public interface MovieDao {
     @Query("SELECT * FROM movie WHERE isFavourite = :isFavourite")
     Single<List<Movie>> getFavouriteMovies(boolean isFavourite);
 
+    @Query("SELECT * FROM movie WHERE id = :id")
+    Single<Movie> getMovieById(int id);
+
     @Insert
     Completable insert(Movie movie);
 
