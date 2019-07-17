@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import by.zdzitavetskaya_darya.moviedb.App;
 import by.zdzitavetskaya_darya.moviedb.api.MovieApi;
+import by.zdzitavetskaya_darya.moviedb.model.pojo.Movie;
 import by.zdzitavetskaya_darya.moviedb.model.pojo.MovieCover;
 import io.reactivex.Single;
 
@@ -26,5 +27,9 @@ public class NetworkModel {
 
     public Single<MovieCover> getSearchedMovies(final String query) {
         return movieApi.searchMovies(query);
+    }
+
+    public Single<Movie> getMovieById(final int id) {
+        return movieApi.getMovieById(id);
     }
 }

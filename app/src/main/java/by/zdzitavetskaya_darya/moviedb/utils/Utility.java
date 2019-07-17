@@ -14,7 +14,7 @@ public final class Utility {
         if (date != null) {
             try {
                 final Date newDate = dateFormat.parse(date);
-                return DateFormat.format("d MMMM y", newDate).toString();
+                return DateFormat.format("dd/MM/y", newDate).toString();
             } catch (final ParseException e) {
                 e.printStackTrace();
             }

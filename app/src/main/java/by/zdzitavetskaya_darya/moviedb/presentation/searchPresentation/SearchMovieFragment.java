@@ -27,7 +27,7 @@ public class SearchMovieFragment extends BaseFragment implements SearchMovieView
 
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar, menu);
+        inflater.inflate(R.menu.fragment_toolbar, menu);
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) searchMenuItem.getActionView();
 

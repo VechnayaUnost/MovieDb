@@ -7,4 +7,11 @@
     <string name="poster_description">Poster not found</string>
     <string name="message_no_internet_connection">No internet connection!</string>
     <string name="message_no_results">No results</string>
+    <string name="content_description_backdrop">movie backdrop</string>
+    <string name="action_add_to_favourite">add to favourite</string>
+    <string name="original_title">Original Title</string>
+    <string name="original_language">Original Language</string>
+    <string name="header_facts">Facts</string>
+    <string name="calendar_image">calendar_image</string>
+    <string name="star_image">star_image</string>
 </resources>
