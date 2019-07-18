@@ -17,16 +17,16 @@ public class NetworkModel {
         App.getAppComponent().inject(this);
     }
 
-    public Single<MovieCover> getTopRatedMovies() {
-        return movieApi.getTopRated();
+    public Single<MovieCover> getTopRatedMovies(final int page) {
+        return movieApi.getTopRated(page);
     }
 
-    public Single<MovieCover> getUpcomingMovies() {
-        return movieApi.getUpcoming();
+    public Single<MovieCover> getUpcomingMovies(final int page) {
+        return movieApi.getUpcoming(page);
     }
 
-    public Single<MovieCover> getSearchedMovies(final String query) {
-        return movieApi.searchMovies(query);
+    public Single<MovieCover> getSearchedMovies(final int page, final String query) {
+        return movieApi.searchMovies(page, query);
     }
 
     public Single<Movie> getMovieById(final int id) {

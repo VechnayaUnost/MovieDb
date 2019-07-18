@@ -15,14 +15,14 @@ public class MovieCover {
     private int totalPages;
 
     @SerializedName("results")
-    private List<Movie> movies;
+    private List<SubMovie> subMovies;
 
-    public List<Movie> getMovies() {
-        return movies;
+    public List<SubMovie> getSubMovies() {
+        return subMovies;
     }
 
-    public void setMovies(final List<Movie> movies) {
-        this.movies = movies;
+    public void setSubMovies(final List<SubMovie> subMovies) {
+        this.subMovies = subMovies;
     }
 
     public int getPage() {

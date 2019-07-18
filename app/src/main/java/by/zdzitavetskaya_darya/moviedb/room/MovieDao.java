@@ -10,23 +10,27 @@ import androidx.room.Query;
 import java.util.List;
 
 import by.zdzitavetskaya_darya.moviedb.model.pojo.Movie;
+import by.zdzitavetskaya_darya.moviedb.model.pojo.SubMovie;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao
 public interface MovieDao {
 
-    @Query("SELECT * FROM movie WHERE isTopRated = :isTopRated")
-    Single<List<Movie>> getTopRatedMovies(boolean isTopRated);
+    @Query("SELECT * FROM SubMovie WHERE isTopRated = :isTopRated")
+    Single<List<SubMovie>> getTopRatedMovies(boolean isTopRated);
 
-    @Query("SELECT * FROM movie WHERE isUpcoming = :isUpcoming")
-    Single<List<Movie>> getUpcomingMovies(boolean isUpcoming);
+    @Query("SELECT * FROM SubMovie WHERE isUpcoming = :isUpcoming")
+    Single<List<SubMovie>> getUpcomingMovies(boolean isUpcoming);
 
-    @Query("SELECT * FROM movie WHERE isFavourite = :isFavourite")
-    Single<List<Movie>> getFavouriteMovies(boolean isFavourite);
+    @Query("SELECT * FROM Movie")
+    Single<List<Movie>> getFavouriteMovies();
 
-    @Query("SELECT * FROM movie WHERE id = :id")
-    Single<Movie> getMovieById(int id);
+    @Query("SELECT * FROM Movie WHERE id = :id")
+    Single<Movie> getMovieByIdFromFavourite(int id);
+
+    @Query("SELECT * FROM SubMovie WHERE id = :id")
+    Single<SubMovie> getMovieById(int id);
 
     @Insert
     Completable insert(Movie movie);
@@ -35,5 +39,5 @@ public interface MovieDao {
     Completable delete(Movie movie);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insertAll(List<Movie> movies);
+    Completable insertAll(List<SubMovie> subMovies);
 }

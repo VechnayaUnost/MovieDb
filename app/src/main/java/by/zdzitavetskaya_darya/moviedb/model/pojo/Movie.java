@@ -48,12 +48,6 @@ public class Movie {
     @SerializedName("release_date")
     private String releaseDate;
 
-    private boolean isTopRated;
-
-    private boolean isUpcoming;
-
-    private boolean isFavourite;
-
     public int getVoteCount() {
         return voteCount;
     }
@@ -156,29 +150,5 @@ public class Movie {
 
     public void setReleaseDate(final String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public boolean isTopRated() {
-        return isTopRated;
-    }
-
-    public void setTopRated(final boolean topRated) {
-        isTopRated = topRated;
-    }
-
-    public boolean isUpcoming() {
-        return isUpcoming;
-    }
-
-    public void setUpcoming(final boolean upcoming) {
-        isUpcoming = upcoming;
-    }
-
-    public boolean isFavourite() {
-        return isFavourite;
-    }
-
-    public void setFavourite(final boolean favourite) {
-        isFavourite = favourite;
     }
 }

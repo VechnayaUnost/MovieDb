@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnPageChange;
 import butterknife.Unbinder;
 import by.zdzitavetskaya_darya.moviedb.adapters.ViewPagerAdapter;
+import by.zdzitavetskaya_darya.moviedb.presentation.favouritePresentation.FavouriteFragment;
 import by.zdzitavetskaya_darya.moviedb.presentation.searchPresentation.SearchMovieFragment;
 import by.zdzitavetskaya_darya.moviedb.presentation.topRatedPresentation.TopRatedFragment;
 import by.zdzitavetskaya_darya.moviedb.presentation.upcomingPresentation.UpcomingFragment;
@@ -57,7 +58,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         adapter.addFragment(new TopRatedFragment());
         adapter.addFragment(new UpcomingFragment());
         adapter.addFragment(new SearchMovieFragment());
-        //TODO add favourite fragment
+        adapter.addFragment(new FavouriteFragment());
         viewPager.setAdapter(adapter);
     }
 
@@ -73,7 +74,9 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                 case R.id.navigation_search:
                     viewPager.setCurrentItem(2);
                     return true;
-                //TODO add navigation favourite
+                case R.id.navigation_favourites:
+                    viewPager.setCurrentItem(3);
+                    return true;
             }
             return false;
         });

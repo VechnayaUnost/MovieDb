@@ -6,4 +6,7 @@ import moxy.MvpView;
 public interface DetailView extends MvpView {
 
     void onMovieSuccess(Movie movie);
+    void onError();
+    void favouriteMovie(Movie movie);
+    void notFavouriteMovie();
 }

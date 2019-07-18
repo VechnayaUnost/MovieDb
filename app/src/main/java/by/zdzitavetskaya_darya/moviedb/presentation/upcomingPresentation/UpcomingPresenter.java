@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import by.zdzitavetskaya_darya.moviedb.App;
 import by.zdzitavetskaya_darya.moviedb.model.DatabaseModel;
 import by.zdzitavetskaya_darya.moviedb.model.NetworkModel;
-import by.zdzitavetskaya_darya.moviedb.model.pojo.Movie;
+import by.zdzitavetskaya_darya.moviedb.model.pojo.SubMovie;
 import by.zdzitavetskaya_darya.moviedb.model.pojo.MovieCover;
 import by.zdzitavetskaya_darya.moviedb.presentation.BasePresenter;
 import by.zdzitavetskaya_darya.moviedb.presentation.BaseView;
@@ -28,22 +28,22 @@ public class UpcomingPresenter extends BasePresenter<BaseView> {
 
     public UpcomingPresenter() {
         App.getAppComponent().inject(this);
-        getMoviesFromNetwork();
+        getMoviesFromNetwork(1);
     }
 
-    private void getMoviesFromNetwork() {
+    public void getMoviesFromNetwork(final int page) {
         compositeDisposable.add(
-                networkModel.getUpcomingMovies()
+                networkModel.getUpcomingMovies(page)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<MovieCover>() {
                             @Override
                             public void onSuccess(final MovieCover movieCover) {
-                                for (final Movie movie: movieCover.getMovies()) {
-                                    movie.setUpcoming(true);
+                                for (final SubMovie subMovie : movieCover.getSubMovies()) {
+                                    subMovie.setUpcoming(true);
                                 }
-                                insertMoviesInDatabase(movieCover.getMovies());
-                                getViewState().onMoviesSuccess(movieCover.getMovies());
+                                insertMoviesInDatabase(movieCover.getSubMovies());
+                                getViewState().onMoviesSuccess(movieCover.getSubMovies());
                             }
 
                             @Override
@@ -60,10 +60,10 @@ public class UpcomingPresenter extends BasePresenter<BaseView> {
                 databaseModel.getUpcomingMovies()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<List<Movie>>() {
+                        .subscribeWith(new DisposableSingleObserver<List<SubMovie>>() {
                             @Override
-                            public void onSuccess(final List<Movie> movies) {
-                                getViewState().onMoviesSuccess(movies);
+                            public void onSuccess(final List<SubMovie> subMovies) {
+                                getViewState().onMoviesSuccess(subMovies);
                             }
 
                             @Override
@@ -73,9 +73,9 @@ public class UpcomingPresenter extends BasePresenter<BaseView> {
                         }));
     }
 
-    private void insertMoviesInDatabase(final List<Movie> movies) {
+    private void insertMoviesInDatabase(final List<SubMovie> subMovies) {
         compositeDisposable.add(
-                databaseModel.insertMovies(movies)
+                databaseModel.insertMovies(subMovies)
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribeWith(new DisposableCompletableObserver() {

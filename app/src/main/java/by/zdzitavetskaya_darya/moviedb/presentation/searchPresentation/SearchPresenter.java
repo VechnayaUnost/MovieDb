@@ -27,16 +27,16 @@ public class SearchPresenter extends BasePresenter<SearchMovieView> {
         App.getAppComponent().inject(this);
     }
 
-    public void getMoviesFromNetwork(final String query) {
+    public void getMoviesFromNetwork(final int page, final String query) {
         compositeDisposable.add(
-                networkModel.getSearchedMovies(query)
+                networkModel.getSearchedMovies(page, query)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<MovieCover>() {
                             @Override
                             public void onSuccess(final MovieCover movieCover) {
-                                if (movieCover.getMovies().size() != 0) {
-                                    getViewState().onMoviesSuccess(movieCover.getMovies());
+                                if (movieCover.getSubMovies().size() != 0) {
+                                    getViewState().onMoviesSuccess(movieCover.getSubMovies());
                                 } else {
                                     getViewState().onMessageShow();
                                 }
@@ -64,7 +64,7 @@ public class SearchPresenter extends BasePresenter<SearchMovieView> {
                     public void onNext(final String s) {
                         getViewState().onMessageHide();
                         if (!s.isEmpty()) {
-                            getMoviesFromNetwork(s);
+                            getMoviesFromNetwork(1, s);
                         } else {
                             getViewState().onListClear();
                         }

@@ -1,14 +1,12 @@
 package by.zdzitavetskaya_darya.moviedb.model;
 
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import by.zdzitavetskaya_darya.moviedb.App;
 import by.zdzitavetskaya_darya.moviedb.model.pojo.Movie;
+import by.zdzitavetskaya_darya.moviedb.model.pojo.SubMovie;
 import by.zdzitavetskaya_darya.moviedb.room.MovieDao;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -22,25 +20,28 @@ public class DatabaseModel {
         App.getAppComponent().inject(this);
     }
 
-    public Single<List<Movie>> getTopRatedMovies() {
+    public Single<List<SubMovie>> getTopRatedMovies() {
         return movieDao.getTopRatedMovies(true);
     }
 
-    public Single<List<Movie>> getUpcomingMovies() {
+    public Single<List<SubMovie>> getUpcomingMovies() {
         return movieDao.getUpcomingMovies(true);
     }
 
     public Single<List<Movie>> getFavouriteMovies() {
-        return movieDao.getFavouriteMovies(true);
+        return movieDao.getFavouriteMovies();
     }
 
-    public Single<Movie> getMovieById(final int id) {
+    public Single<Movie> getMovieByIdFromFavourite(final int id) {
+        return movieDao.getMovieByIdFromFavourite(id);
+    }
+
+    public Single<SubMovie> getMovieById(final int id) {
         return movieDao.getMovieById(id);
     }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public Completable insertMovies(final List<Movie> movies) {
-        return movieDao.insertAll(movies);
+    public Completable insertMovies(final List<SubMovie> subMovies) {
+        return movieDao.insertAll(subMovies);
     }
 
     public Completable insertMovie(final Movie movie) {

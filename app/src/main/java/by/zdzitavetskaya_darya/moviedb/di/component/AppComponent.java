@@ -9,6 +9,7 @@ import by.zdzitavetskaya_darya.moviedb.di.module.RoomModule;
 import by.zdzitavetskaya_darya.moviedb.model.DatabaseModel;
 import by.zdzitavetskaya_darya.moviedb.model.NetworkModel;
 import by.zdzitavetskaya_darya.moviedb.presentation.detailPresentation.DetailPresenter;
+import by.zdzitavetskaya_darya.moviedb.presentation.favouritePresentation.FavouritePresenter;
 import by.zdzitavetskaya_darya.moviedb.presentation.searchPresentation.SearchPresenter;
 import by.zdzitavetskaya_darya.moviedb.presentation.topRatedPresentation.TopRatedPresenter;
 import by.zdzitavetskaya_darya.moviedb.presentation.upcomingPresentation.UpcomingPresenter;
@@ -25,4 +26,5 @@ public interface AppComponent {
     void inject(UpcomingPresenter upcomingPresenter);
     void inject(SearchPresenter searchPresenter);
     void inject(DetailPresenter detailPresenter);
+    void inject(FavouritePresenter favouritePresenter);
 }

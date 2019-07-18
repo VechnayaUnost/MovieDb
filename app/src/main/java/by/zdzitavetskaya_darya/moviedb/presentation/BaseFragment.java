@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import by.zdzitavetskaya_darya.moviedb.presentation.detailPresentation.DetailActivity;
 import by.zdzitavetskaya_darya.moviedb.R;
 import by.zdzitavetskaya_darya.moviedb.adapters.MoviesAdapter;
 import by.zdzitavetskaya_darya.moviedb.constants.Constants;
+import by.zdzitavetskaya_darya.moviedb.presentation.detailPresentation.DetailActivity;
 import moxy.MvpAppCompatActivity;
 import moxy.MvpAppCompatFragment;
 
@@ -34,6 +34,10 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements Movie
 
     private Unbinder unbinder;
     protected MoviesAdapter adapter;
+    protected boolean isFetchingMovies;
+    protected int currentPage = 1;
+
+    protected abstract void getMoreMovies(int currentPage);
 
     @Nullable
     @Override
@@ -56,6 +60,20 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements Movie
 
         adapter = new MoviesAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull final RecyclerView recyclerView, final int dx, final int dy) {
+                final int totalItemCount = layoutManager.getItemCount();
+                final int visibleItemCount = layoutManager.getChildCount();
+                final int firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                    if (!isFetchingMovies) {
+                        getMoreMovies(currentPage + 1);
+                    }
+                }
+            }
+        });
     }
 
     @Override

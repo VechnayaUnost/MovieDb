@@ -6,7 +6,7 @@
         android:id="@+id/action_search"
         android:title="@android:string/search_go"
         android:icon="@drawable/ic_search_24dp"
-        android:visible="false"
+        android:visible="true"
         yourapp:showAsAction="collapseActionView|always"
         yourapp:actionViewClass="androidx.appcompat.widget.SearchView"
         />
