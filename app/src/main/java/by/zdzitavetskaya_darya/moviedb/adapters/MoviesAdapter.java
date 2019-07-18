@@ -51,6 +51,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
                 .load(Constants.BASE_POSTER_URL + movie.getPosterPath())
                 .into(holder.moviePoster);
 
+        //GlideApp.with(this).load(Constants.BASE_POSTER_URL + movie.getBackdropPath());
+
         holder.releaseDate.setText(Utility.getFormatDate(movie.getReleaseDate()));
 
         holder.overview.setText(movie.getOverview());

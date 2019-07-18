@@ -1,5 +1,6 @@
 package by.zdzitavetskaya_darya.moviedb.presentation.searchPresentation;
 
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,8 +31,13 @@ public class SearchMovieFragment extends BaseFragment implements SearchMovieView
     private SearchView searchView;
 
     @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+    public void onCreate(final Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_toolbar, menu);
 
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
@@ -43,11 +49,13 @@ public class SearchMovieFragment extends BaseFragment implements SearchMovieView
 
     @Override
     public void onMoviesSuccess(final List<SubMovie> subMovies) {
-        //adapter.updateAdapter(subMovies);
-
         final List<Movie> movies = new ArrayList<>(subMovies);
-        adapter.addMovies(movies);
-        isFetchingMovies = false;
+        if (!isFetchingMovies) {
+            adapter.updateAdapter(movies);
+        } else {
+            adapter.addMovies(movies);
+            isFetchingMovies = false;
+        }
     }
 
     @Override

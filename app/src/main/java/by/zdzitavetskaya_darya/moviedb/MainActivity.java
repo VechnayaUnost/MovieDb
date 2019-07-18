@@ -3,6 +3,7 @@ package by.zdzitavetskaya_darya.moviedb;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,8 +28,12 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private Unbinder unbinder;
     private MenuItem prevMenuItem;
+    private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,12 +42,15 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
         setupViewPager(viewPager);
         setupBottomNavigationViewListener(bottomNavigationView);
+        invalidateFragmentMenus(viewPager.getCurrentItem());
     }
 
     @OnPageChange(R.id.view_pager)
     public void onPageSelected(final int position) {
+        invalidateFragmentMenus(position);
         if (prevMenuItem != null) {
             prevMenuItem.setChecked(false);
         } else {
@@ -53,8 +61,15 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         prevMenuItem = bottomNavigationView.getMenu().getItem(position);
     }
 
+    private void invalidateFragmentMenus(final int position){
+        for(int i = 0; i < adapter.getCount(); i++){
+            adapter.getItem(i).setHasOptionsMenu(i == position);
+        }
+        invalidateOptionsMenu();
+    }
+
     private void setupViewPager(final ViewPager viewPager) {
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new TopRatedFragment());
         adapter.addFragment(new UpcomingFragment());
         adapter.addFragment(new SearchMovieFragment());

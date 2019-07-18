@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,13 +20,9 @@ import by.zdzitavetskaya_darya.moviedb.R;
 import by.zdzitavetskaya_darya.moviedb.adapters.MoviesAdapter;
 import by.zdzitavetskaya_darya.moviedb.constants.Constants;
 import by.zdzitavetskaya_darya.moviedb.presentation.detailPresentation.DetailActivity;
-import moxy.MvpAppCompatActivity;
 import moxy.MvpAppCompatFragment;
 
 public abstract class BaseFragment extends MvpAppCompatFragment implements MoviesAdapter.Listener {
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     @BindView(R.id.movies_recycler_view)
     RecyclerView recyclerView;
@@ -44,9 +39,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements Movie
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_list_movies, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        ((MvpAppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
 
         return view;
     }
