@@ -22,7 +22,6 @@ public class TopRatedFragment extends BaseFragment implements BaseView {
         final List<Movie> movies = new ArrayList<>(subMovies);
         adapter.addMovies(movies);
         isFetchingMovies = false;
-        //adapter.updateAdapter(subMovies);
     }
 
     @Override

@@ -20,7 +20,6 @@ public class UpcomingFragment extends BaseFragment implements BaseView {
     @Override
     public void onMoviesSuccess(final List<SubMovie> subMovies) {
         final List<Movie> movies = new ArrayList<>(subMovies);
-        //adapter.updateAdapter(subMovies);
         adapter.addMovies(movies);
         isFetchingMovies = false;
     }

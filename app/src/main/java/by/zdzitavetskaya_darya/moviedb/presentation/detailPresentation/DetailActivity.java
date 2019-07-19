@@ -186,12 +186,14 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView{
         GlideApp
                 .with(this)
                 .load(Constants.BASE_POSTER_URL + movie.getBackdropPath())
+                .placeholder(R.drawable.logo)
                 .into(ivMovieBackdrop);
 
 
         GlideApp
                 .with(this)
                 .load(Constants.BASE_POSTER_URL + movie.getPosterPath())
+                .placeholder(R.drawable.progress_animation)
                 .into(ivMoviePoster);
 
         tvOriginalTitle.setText(movie.getOriginalTitle());
